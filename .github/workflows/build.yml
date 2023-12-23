@@ -37,8 +37,8 @@ jobs:
         run: npm run test
 
   deploy:
-    needs: test
-    runs-on: unbuntu-latest
+    needs: [lint, test]
+    runs-on: ubuntu-latest
     steps:
       - name: Get the code.
         uses: actions/checkout@v4
