@@ -1,0 +1,58 @@
+name: React Project Build Scripts
+on: push
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code.
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install the dependencies.
+        run: npm ci
+
+      - name: Linting the project.
+        run: npm run lint
+
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code.
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install the dependencies.
+        run: npm ci
+
+      - name: Testing the project.
+        run: npm run test
+
+  deploy:
+    needs: [lint, test]
+    runs-on: unbuntu-latest
+    steps:
+      - name: Get the code.
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install the dependencies.
+        run: npm ci
+
+      - name: Building the project.
+        run: npm run build
+
+      - name: Deploying the project.
+        run: echo "Deploying..."
