@@ -37,7 +37,7 @@ jobs:
         run: npm run test
 
   deploy:
-    needs: [lint, test]
+    needs: test
     runs-on: unbuntu-latest
     steps:
       - name: Get the code.
